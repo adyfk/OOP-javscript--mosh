@@ -8,8 +8,16 @@ Circle.prototype.draw = function () {
 }   //No repeat always
 
 const c1 = new Circle(1)
-const c2 = new Circle(2)
 
 Circle.prototype.toString = function () {
     return 'Circle with Radius ' + this.radius
 }
+
+//Only Instance Member
+console.log(Object.keys(c1))
+
+//all member instace n prototype
+for (let key in c1) console.log(key)
+
+//Only Instace Property
+console.log(c1.hasOwnProperty('draw'))
