@@ -1,10 +1,15 @@
-let person = { name: 'Adi' }
-let objectBase = Object.getPrototypeOf(person)
-let descriptor = Object.getOwnPropertyDescriptor(objectBase, 'toString')
-console.log(descriptor)
+function Circle(radius) {
+    //instance Members
+    this.radius = radius
+}
+Circle.prototype.draw = function () {
+    //Prototype Members
+    console.log('draw')
+}   //No repeat always
 
-Object.defineProperty(person, 'name', {
-    writable: false, //tidak bisa diubah
-    enumerable: false, //no show the keys
-    configurable: false //Tidak bisa di Delete
-})
+const c1 = new Circle(1)
+const c2 = new Circle(2)
+
+Circle.prototype.toString = function () {
+    return 'Circle with Radius ' + this.radius
+}
