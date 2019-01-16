@@ -1,18 +1,21 @@
 const _radius = new WeakMap()
-const _movie = new WeakMap()
 
 class Circle {
     constructor(radius) {
         _radius.set(this, radius)
-        _movie.set(this, () => {
-            console.log('move', this);
-        })
     }
-    draw() {
-        // console.log(_radius.get(this))
-        _movie.get(this)() //will be undifine
+    get radius() {
+        return _radius.get(this)
     }
+    set radius(value) {
+        if (value <= 0) throw new Error('Invalid Value')
+        _radius.set(this, value)
+    }
+
 }
 
 //check any or not //it will not any
 const c = new Circle(1)
+console.log(c.radius)
+console.log('Isi', c.radius = 10)
+console.log('Isi min', c.radius = -1)   
