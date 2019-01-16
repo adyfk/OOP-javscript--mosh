@@ -1,35 +1,27 @@
-function mixin(target, ...sources) {
-  Object.assign(target, ...sources)
-}
-const canEat = {
-  eat: function () {
-    this.hunger--;
-    console.log('Eating')
+function HtmlELement() {
+  this.click = function () {
+    console.log('Click')
   }
 }
-const canWalk = {
-  walk: function () {
-    console.log('Walking')
-  }
+HtmlELement.prototype.focus = function () {
+  console.log('Focued')
 }
 
-const canSwim = {
-  swim: function () {
-    console.log('Swimming')
+function HtmlSelectELement(items = []) {
+  this.items = items
+
+  this.addItem = function (item) {
+    this.items.push(item)
+  }
+
+  this.removeItem = function (item) {
+    this.items.splice(this.items.indexOf(item), 1)
   }
 }
+// HtmlSelectELement.prototype = Object.create(HtmlELement.prototype)//Klik Not Include
+HtmlSelectELement.prototype = new HtmlELement() //Solution
+HtmlSelectELement.prototype.constructor = HtmlSelectELement()
 
-//============================ < 1 >
-// const person = Object.assign({}, canEat, canWalk)
-// console.log(person)
-
-//============================ < 2 >
-function Person() { }
-Object.assign(Person.prototype, canEat, canWalk)
-const person = new Person()
-console.log(person)
-
-function GoldFish() { }
-mixin(GoldFish.prototype, canEat, canSwim)
-const goldFish = new GoldFish()
-console.log(goldFish)
+//agar sama
+new HtmlSelectELement()
+new HtmlSelectELement.prototype.constructor
