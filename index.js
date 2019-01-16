@@ -1,7 +1,4 @@
-class Math2 {
-  static abs(val) {
-    return val
-  }
-}
-
-console.log(Math2.abs(10))
+//
+//By default in the body on classes (use Strict) Mode 
+//Prevent The Global Object
+//
