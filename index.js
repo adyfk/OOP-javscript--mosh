@@ -1,17 +1,18 @@
-const _radius = Symbol()
-const _draw = Symbol()
+const _radius = new WeakMap()
+const _movie = new WeakMap()
 
 class Circle {
     constructor(radius) {
-        this[_radius] = radius
+        _radius.set(this, radius)
+        _movie.set(this, () => {
+            console.log('move', this);
+        })
     }
-    [_draw]() {
-
+    draw() {
+        // console.log(_radius.get(this))
+        _movie.get(this)() //will be undifine
     }
 }
 
 //check any or not //it will not any
-const c = new Circle(10)
-console.log('This is C', c)
-console.log(c)
-console.log(Object.getOwnPropertySymbols(c))
+const c = new Circle(1)
