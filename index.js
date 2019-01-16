@@ -1,40 +1,35 @@
-function extend(Child, Parent) {
-  Child.prototype = Object.create(Parent.prototype);
-  Child.prototype.constructor = Child;
+function mixin(target, ...sources) {
+  Object.assign(target, ...sources)
 }
-function Shape() { }
-Shape.prototype.duplicate = function () {
-  console.log("Duplicate Shape");
-};
+const canEat = {
+  eat: function () {
+    this.hunger--;
+    console.log('Eating')
+  }
+}
+const canWalk = {
+  walk: function () {
+    console.log('Walking')
+  }
+}
 
-function Circle() { }
-extend(Circle, Shape);
+const canSwim = {
+  swim: function () {
+    console.log('Swimming')
+  }
+}
 
-Circle.prototype.duplicate = function () {
-  console.log("Duplicate Circle");
-};
+//============================ < 1 >
+// const person = Object.assign({}, canEat, canWalk)
+// console.log(person)
 
-function Square() { }
-extend(Square, Shape);
+//============================ < 2 >
+function Person() { }
+Object.assign(Person.prototype, canEat, canWalk)
+const person = new Person()
+console.log(person)
 
-Square.prototype.duplicate = function () {
-  console.log("Duplicate Square");
-};
-
-const Shapes = [
-  new Circle(),
-  new Square()
-]
-
-// for (let Shape of Shapes) {
-//   if (Shape.type === 'Circle')
-//     duplicateCircle()
-//   else if (Shape.type === 'Square')
-//     duplicateSquare()
-//   else
-//     duplicateShape()
-// }
-
-for (let Shape of Shapes) {
-  Shape.duplicate() //This is Polymorphism
-} 
+function GoldFish() { }
+mixin(GoldFish.prototype, canEat, canSwim)
+const goldFish = new GoldFish()
+console.log(goldFish)
