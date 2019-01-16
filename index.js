@@ -1,10 +1,7 @@
-class Circle {
-  constructor(radius) {
-    this.radius = radius
-    this.move = function () { }
-  }
-  draw() {
-    console.log('Draw')
+class Math2 {
+  static abs(val) {
+    return val
   }
 }
-const c = new Circle(10)
+
+console.log(Math2.abs(10))
